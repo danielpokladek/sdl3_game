@@ -1,7 +1,9 @@
 #ifndef SDL_PLATFORMER_SPRITE_H
 #define SDL_PLATFORMER_SPRITE_H
-#include "gameobject.h"
+
 #include <SDL3/SDL.h>
+
+#include "gameobject.h"
 
 class Sprite : public GameObject {
 private:

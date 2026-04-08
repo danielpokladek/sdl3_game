@@ -9,7 +9,6 @@
 #include "src/components/gameobject.h"
 #include "src/components/sprite.h"
 
-
 int main() {
     auto *renderer = new Renderer();
 
