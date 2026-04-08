@@ -6,6 +6,9 @@
 #include <SDL3_image/SDL_image.h>
 #include <glm/glm.hpp>
 
+#include "components/gameobject.h"
+#include "components/sprite.h"
+
 struct RendererData {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -35,6 +38,8 @@ public:
 
     ~Renderer();
 
+    RendererData &State() { return rendererData; }
+
     bool Initialize();
 
     void Shutdown() const;
@@ -43,7 +48,7 @@ public:
 
     void SetRendererSize(int width, int height);
 
-    RendererData &State() { return rendererData; }
+    void DrawObject(Sprite *sprite);
 };
 
 #endif

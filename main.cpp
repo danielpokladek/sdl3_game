@@ -1,10 +1,14 @@
+#include <filesystem>
 #include <format>
+#include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
 #include <glm/glm.hpp>
 
 #include "src/renderer.h"
+#include "src/components/gameobject.h"
+#include "src/components/sprite.h"
 
 
 int main() {
@@ -18,6 +22,25 @@ int main() {
     bool isRunning = true;
 
     float test = 0;
+
+    std::string spritesheetPath = "assets/sprites/kenney/spritesheet.png";
+
+    SDL_Texture *spritesheet = IMG_LoadTexture(renderer->State().renderer, spritesheetPath.c_str());
+    SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
+
+    auto *sprite1 = new Sprite();
+    sprite1->position = glm::vec2(50, 50);
+    sprite1->SetTexture(spritesheet);
+    // sprite1->SetParent(container);
+
+    auto *sprite2 = new Sprite();
+    sprite2->position = glm::vec2(50 + 16, 50);
+    sprite2->SetTexture(spritesheet);
+    // sprite2->SetParent(container);
+
+    auto *container = new GameObject();
+    container->AddChild(sprite1);
+    container->AddChild(sprite2);
 
     while (isRunning) {
         uint64_t currentTime = SDL_GetTicks();
@@ -47,6 +70,13 @@ int main() {
         SDL_RenderClear(renderer->State().renderer);
 
         // Render stuff here...
+        auto &children = container->GetChildren();
+
+        for (auto child: children) {
+            if (Sprite *sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
+                renderer->DrawObject(sprite);
+            }
+        }
 
         SDL_SetRenderDrawColor(renderer->State().renderer, 255, 255, 255, 255);
         SDL_RenderDebugText(renderer->State().renderer, 5, 5,
@@ -61,3 +91,5 @@ int main() {
 
     return 0;
 }
+
+

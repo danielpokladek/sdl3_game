@@ -1,6 +1,5 @@
 #include "renderer.h"
 
-
 Renderer::Renderer() : rendererData() {
 }
 
@@ -51,4 +50,21 @@ void Renderer::SetWindowSize(const int width, const int height) {
 void Renderer::SetRendererSize(const int width, const int height) {
     rendererData.logicalWidth = width;
     rendererData.logicalHeight = height;
+}
+
+void Renderer::DrawObject(Sprite *sprite) {
+    auto spriteSize = sprite->GetSpriteSize();
+
+    SDL_FRect src{
+        .x = spriteSize.x * 5, .y = spriteSize.y * 4,
+        .w = spriteSize.x, .h = spriteSize.y
+    };
+
+    SDL_FRect dest{
+        .x = sprite->position.x, .y = sprite->position.y,
+        .w = spriteSize.x, .h = spriteSize.y
+    };
+
+    SDL_RenderTextureRotated(State().renderer, sprite->GetTexture(), &src, &dest, 0, nullptr,
+                             SDL_FLIP_NONE);
 }

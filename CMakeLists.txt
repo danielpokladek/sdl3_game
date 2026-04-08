@@ -11,7 +11,13 @@ find_package(glm REQUIRED)
 
 add_executable(sdl_platformer main.cpp
         src/renderer.cpp
-        src/renderer.h)
+        src/renderer.h
+        src/components/gameobject.cpp
+        src/components/gameobject.h
+        src/components/sprite.cpp
+        src/components/sprite.h
+        src/data/spritesheet.cpp
+        src/data/spritesheet.h)
 
 # Include SDL3 in the project.
 target_include_directories(sdl_platformer PUBLIC ${SDL3_INCLUDE_DIRS})
