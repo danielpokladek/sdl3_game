@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include "gameobject.h"
+#include "GameObject.h"
 
 GameObject::GameObject(std::string name) : position(0), scale(0) {
     mParent = nullptr;

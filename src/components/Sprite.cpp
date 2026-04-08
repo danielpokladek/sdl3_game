@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "Sprite.h"
 
 Sprite::Sprite(std::string name) : GameObject(std::move(name)) {
     mTexture = nullptr;

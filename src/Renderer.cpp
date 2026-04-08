@@ -1,4 +1,4 @@
-#include "renderer.h"
+#include "Renderer.h"
 
 Renderer::Renderer() : rendererData() {
 }

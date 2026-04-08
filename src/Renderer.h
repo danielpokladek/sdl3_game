@@ -6,8 +6,8 @@
 #include <SDL3_image/SDL_image.h>
 #include <glm/glm.hpp>
 
-#include "components/gameobject.h"
-#include "components/sprite.h"
+#include "components/GameObject.h"
+#include "components/Sprite.h"
 
 struct RendererData {
     SDL_Window *window;

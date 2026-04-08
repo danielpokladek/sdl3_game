@@ -5,9 +5,9 @@
 #include <SDL3_image/SDL_image.h>
 #include <glm/glm.hpp>
 
-#include "src/renderer.h"
-#include "src/components/gameobject.h"
-#include "src/components/sprite.h"
+#include "src/Renderer.h"
+#include "src/components/GameObject.h"
+#include "src/components/Sprite.h"
 
 int main() {
     auto *renderer = new Renderer();

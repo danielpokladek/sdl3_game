@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "gameobject.h"
+#include "GameObject.h"
 
 class Sprite : public GameObject {
 private:
