@@ -4,10 +4,13 @@
 #include <SDL3/SDL.h>
 
 #include "GameObject.h"
+#include "../data/TileData.h"
 
 class Sprite : public GameObject {
 private:
     SDL_Texture *mTexture;
+
+    int mTileIndex;
 
     glm::vec2 *mSpriteSize;
     glm::vec2 *mSpritePosition;
@@ -20,7 +23,7 @@ public:
 
     SDL_Texture *GetTexture() const { return mTexture; }
 
-    void SetTexture(SDL_Texture *newTexture, glm::vec2 *spriteSize, glm::vec2 *spritePosition);
+    void SetTexture(SDL_Texture *newTexture, TileID tileIndex);
 };
 
 #endif //SDL_PLATFORMER_SPRITE_H

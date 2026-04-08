@@ -26,20 +26,21 @@ int main() {
     SDL_Texture *spritesheet = IMG_LoadTexture(renderer->State().renderer, spritesheetPath.c_str());
     SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
 
-    auto spriteSize = glm::vec2(16, 16);
-    auto spritePosition = glm::vec2(5, 4);
-
-    auto *sprite1 = new Sprite();
-    sprite1->position = glm::vec2(50, 50);
-    sprite1->SetTexture(spritesheet, &spriteSize, &spritePosition);
-
-    auto *sprite2 = new Sprite();
-    sprite2->position = glm::vec2(50 + 16, 50);
-    sprite2->SetTexture(spritesheet, &spriteSize, &spritePosition);
-
     auto *container = new GameObject();
-    container->AddChild(sprite1);
-    container->AddChild(sprite2);
+
+    const int offsetX = 50;
+    const int offsetY = 300;
+
+    for (int i = 0; i < 5; i++) {
+        bool isFirst = i == 0;
+        bool isLast = i == 4;
+        TileID tile = isFirst ? TileID::GroundLeft : isLast ? TileID::GroundRight : TileID::GroundCenter;
+
+        auto *sprite = new Sprite();
+        sprite->position = glm::vec2(offsetX + i * 16, offsetY);
+        sprite->SetTexture(spritesheet, tile);
+        container->AddChild(sprite);
+    }
 
     while (isRunning) {
         uint64_t currentTime = SDL_GetTicks();
@@ -69,10 +70,9 @@ int main() {
         SDL_RenderClear(renderer->State().renderer);
 
         // Render stuff here...
-        auto &children = container->GetChildren();
 
-        for (auto child: children) {
-            if (auto *sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
+        for (auto &child: container->GetChildren()) {
+            if (auto sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
                 renderer->DrawObject(sprite);
             }
         }

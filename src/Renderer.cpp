@@ -57,8 +57,8 @@ void Renderer::DrawObject(Sprite *sprite) {
     auto spritePosition = sprite->GetSpritePosition();
 
     SDL_FRect src{
-        .x = spriteSize->x * spritePosition->x,
-        .y = spriteSize->y * spritePosition->y,
+        .x = spritePosition->x,
+        .y = spritePosition->y,
         .w = spriteSize->x,
         .h = spriteSize->y
     };
