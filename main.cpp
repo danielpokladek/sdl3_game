@@ -44,7 +44,7 @@ int main() {
 
     while (isRunning) {
         uint64_t currentTime = SDL_GetTicks();
-        float deltaTime = (currentTime - previousTime) / 1000.0f;
+        float deltaTime = static_cast<float>(currentTime - previousTime) / 1000.0f;
 
         test += deltaTime;
         SDL_Event event{0};
@@ -73,7 +73,7 @@ int main() {
         auto &children = container->GetChildren();
 
         for (auto child: children) {
-            if (Sprite *sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
+            if (auto *sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
                 renderer->DrawObject(sprite);
             }
         }

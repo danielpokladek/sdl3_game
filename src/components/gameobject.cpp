@@ -8,16 +8,20 @@ GameObject::GameObject(std::string name) : position(0), scale(0) {
     mName = name;
 }
 
-void GameObject::SetParent(GameObject *newParent) {
-    mParent = newParent;
-    // mParent->AddChild(this);
-}
-
 void GameObject::AddChild(GameObject *child) {
+    if (child->mParent != nullptr) {
+        child->mParent->RemoveChild(child);
+    }
+
     child->mParent = this;
-    mChildren.push_back(std::move(child));
+    mChildren.push_back(child);
 }
 
-void GameObject::RemoveChild(GameObject *childToRemove) {
-    return;
+void GameObject::RemoveChild(GameObject *child) {
+    auto it = std::remove(mChildren.begin(), mChildren.end(), child);
+
+    if (it != mChildren.end()) {
+        mChildren.erase(it);
+        child->mParent = nullptr;
+    }
 }

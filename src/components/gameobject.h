@@ -22,8 +22,6 @@ public:
 
     const std::vector<GameObject *> &GetChildren() const { return mChildren; }
 
-    void SetParent(GameObject *newParent);
-
     void AddChild(GameObject *child);
 
     void RemoveChild(GameObject *child);
