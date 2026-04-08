@@ -54,15 +54,18 @@ void Renderer::SetRendererSize(const int width, const int height) {
 
 void Renderer::DrawObject(Sprite *sprite) {
     auto spriteSize = sprite->GetSpriteSize();
+    auto spritePosition = sprite->GetSpritePosition();
 
     SDL_FRect src{
-        .x = spriteSize.x * 5, .y = spriteSize.y * 4,
-        .w = spriteSize.x, .h = spriteSize.y
+        .x = spriteSize->x * spritePosition->x,
+        .y = spriteSize->y * spritePosition->y,
+        .w = spriteSize->x,
+        .h = spriteSize->y
     };
 
     SDL_FRect dest{
         .x = sprite->position.x, .y = sprite->position.y,
-        .w = spriteSize.x, .h = spriteSize.y
+        .w = spriteSize->x, .h = spriteSize->y
     };
 
     SDL_RenderTextureRotated(State().renderer, sprite->GetTexture(), &src, &dest, 0, nullptr,

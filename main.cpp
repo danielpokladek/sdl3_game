@@ -1,6 +1,5 @@
 #include <filesystem>
 #include <format>
-#include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
@@ -28,15 +27,16 @@ int main() {
     SDL_Texture *spritesheet = IMG_LoadTexture(renderer->State().renderer, spritesheetPath.c_str());
     SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
 
+    auto spriteSize = glm::vec2(16, 16);
+    auto spritePosition = glm::vec2(5, 4);
+
     auto *sprite1 = new Sprite();
     sprite1->position = glm::vec2(50, 50);
-    sprite1->SetTexture(spritesheet);
-    // sprite1->SetParent(container);
+    sprite1->SetTexture(spritesheet, &spriteSize, &spritePosition);
 
     auto *sprite2 = new Sprite();
     sprite2->position = glm::vec2(50 + 16, 50);
-    sprite2->SetTexture(spritesheet);
-    // sprite2->SetParent(container);
+    sprite2->SetTexture(spritesheet, &spriteSize, &spritePosition);
 
     auto *container = new GameObject();
     container->AddChild(sprite1);

@@ -6,15 +6,19 @@
 class Sprite : public GameObject {
 private:
     SDL_Texture *mTexture;
-    glm::vec2 mSpriteSize;
+
+    glm::vec2 *mSpriteSize;
+    glm::vec2 *mSpritePosition;
 
 public:
     Sprite(std::string name = "Sprite");
 
-    SDL_Texture *GetTexture() const { return mTexture; }
-    glm::vec2 GetSpriteSize() const { return mSpriteSize; }
+    glm::vec2 *GetSpriteSize() const { return mSpriteSize; }
+    glm::vec2 *GetSpritePosition() const { return mSpritePosition; }
 
-    void SetTexture(SDL_Texture *newTexture);
+    SDL_Texture *GetTexture() const { return mTexture; }
+
+    void SetTexture(SDL_Texture *newTexture, glm::vec2 *spriteSize, glm::vec2 *spritePosition);
 };
 
 #endif //SDL_PLATFORMER_SPRITE_H
