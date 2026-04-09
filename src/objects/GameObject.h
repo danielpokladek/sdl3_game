@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <vector>
-#include <glm/vec2.hpp>
 
 #include "components/Component.h"
 

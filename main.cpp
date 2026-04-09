@@ -3,7 +3,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
-#include <glm/glm.hpp>
 
 #include "Renderer.h"
 #include "data/TileData.h"
@@ -24,7 +23,7 @@ int main() {
 
     std::string spritesheetPath = "assets/sprites/kenney/spritesheet.png";
 
-    SDL_Texture *spritesheet = IMG_LoadTexture(renderer->State().renderer, spritesheetPath.c_str());
+    SDL_Texture *spritesheet = IMG_LoadTexture(renderer->Data().renderer, spritesheetPath.c_str());
     SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
 
     auto *container = new GameObject();
@@ -42,7 +41,7 @@ int main() {
         tileGO->transform.y = offsetY;
         container->AddChild(tileGO);
 
-        tileGO->AddComponent<SpriteComponent>(renderer->State().renderer, spritesheet,
+        tileGO->AddComponent<SpriteComponent>(renderer->Data().renderer, spritesheet,
                                               static_cast<int>(tile));
     }
 
@@ -70,8 +69,8 @@ int main() {
             }
         }
 
-        SDL_SetRenderDrawColor(renderer->State().renderer, 34, 35, 35, 255);
-        SDL_RenderClear(renderer->State().renderer);
+        SDL_SetRenderDrawColor(renderer->Data().renderer, 34, 35, 35, 255);
+        SDL_RenderClear(renderer->Data().renderer);
 
         // Render stuff here...
         for (auto &child: container->GetChildren()) {
@@ -79,12 +78,12 @@ int main() {
         }
 
         // TODO: For now just showing elapsed time.
-        SDL_SetRenderDrawColor(renderer->State().renderer, 255, 255, 255, 255);
-        SDL_RenderDebugText(renderer->State().renderer, 5, 5,
+        SDL_SetRenderDrawColor(renderer->Data().renderer, 255, 255, 255, 255);
+        SDL_RenderDebugText(renderer->Data().renderer, 5, 5,
                             std::format("Test Value: {}", test).c_str());
 
         // Swap buffers and show the frame.
-        SDL_RenderPresent(renderer->State().renderer);
+        SDL_RenderPresent(renderer->Data().renderer);
         previousTime = currentTime;
     }
 

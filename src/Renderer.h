@@ -34,7 +34,7 @@ public:
 
     ~Renderer();
 
-    RendererData &State() { return rendererData; }
+    RendererData &Data() { return rendererData; }
 
     bool Initialize();
 
