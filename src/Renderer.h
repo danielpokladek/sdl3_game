@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "components/Sprite.h"
+#include "objects/components/SpriteComponent.h"
 
 struct RendererData {
     SDL_Window *window;
@@ -43,8 +43,6 @@ public:
     void SetWindowSize(int width, int height);
 
     void SetRendererSize(int width, int height);
-
-    void DrawObject(Sprite *sprite);
 };
 
 #endif

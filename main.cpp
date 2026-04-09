@@ -5,9 +5,10 @@
 #include <SDL3_image/SDL_image.h>
 #include <glm/glm.hpp>
 
-#include "src/Renderer.h"
-#include "src/components/GameObject.h"
-#include "src/components/Sprite.h"
+#include "Renderer.h"
+#include "data/TileData.h"
+#include "objects/GameObject.h"
+#include "objects/components/SpriteComponent.h"
 
 int main() {
     auto *renderer = new Renderer();
@@ -36,15 +37,17 @@ int main() {
         bool isLast = i == 4;
         TileID tile = isFirst ? TileID::GroundLeft : isLast ? TileID::GroundRight : TileID::GroundCenter;
 
-        auto *sprite = new Sprite();
-        sprite->position = glm::vec2(offsetX + i * 16, offsetY);
-        sprite->SetTexture(spritesheet, tile);
-        container->AddChild(sprite);
+        auto *tileGO = new GameObject();
+        tileGO->position = glm::vec2(offsetX + i * 16, offsetY);
+        container->AddChild(tileGO);
+
+        tileGO->AddComponent<SpriteComponent>(renderer->State().renderer, spritesheet,
+                                              static_cast<int>(tile));
     }
 
     while (isRunning) {
-        uint64_t currentTime = SDL_GetTicks();
-        float deltaTime = static_cast<float>(currentTime - previousTime) / 1000.0f;
+        const uint64_t currentTime = SDL_GetTicks();
+        const float deltaTime = static_cast<float>(currentTime - previousTime) / 1000.0f;
 
         test += deltaTime;
         SDL_Event event{0};
@@ -70,13 +73,11 @@ int main() {
         SDL_RenderClear(renderer->State().renderer);
 
         // Render stuff here...
-
         for (auto &child: container->GetChildren()) {
-            if (auto sprite = dynamic_cast<Sprite *>(child); sprite != nullptr) {
-                renderer->DrawObject(sprite);
-            }
+            child->Update(deltaTime);
         }
 
+        // TODO: For now just showing elapsed time.
         SDL_SetRenderDrawColor(renderer->State().renderer, 255, 255, 255, 255);
         SDL_RenderDebugText(renderer->State().renderer, 5, 5,
                             std::format("Test Value: {}", test).c_str());

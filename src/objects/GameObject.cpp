@@ -7,6 +7,12 @@ GameObject::GameObject(std::string name) : position(0), scale(0) {
     mName = name;
 }
 
+void GameObject::Update(float deltaTime) {
+    for (auto &component: mComponents) {
+        component->Update(deltaTime);
+    }
+}
+
 void GameObject::AddChild(GameObject *child) {
     if (child->mParent != nullptr) {
         child->mParent->RemoveChild(child);
