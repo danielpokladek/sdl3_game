@@ -1,10 +1,12 @@
 #ifndef SDL_PLATFORMER_PLAYERCONTROLSCOMPONENT_H
 #define SDL_PLATFORMER_PLAYERCONTROLSCOMPONENT_H
 
-#include "Component.h"
+#include "../Component.h"
 
 class PlayerControlsComponent : public Component {
 public:
+    PlayerControlsComponent();
+
     void Update(float deltaTime) override;
 };
 

@@ -6,6 +6,7 @@
 
 #include "data/TileData.h"
 #include "objects/GameObject.h"
+#include "objects/components/player/PlayerControlsComponent.h"
 
 GameManager::GameManager() {
     auto *renderer = new Renderer();
@@ -51,6 +52,7 @@ void GameManager::StartLoop() {
     player->transform.y = 250;
     player->AddComponent<SpriteComponent>(renderer, spritesheet,
                                           static_cast<int>(TileID::PlayerIdle));
+    player->AddComponent<PlayerControlsComponent>();
     container->AddChild(player);
 
     float test = 0.0f;

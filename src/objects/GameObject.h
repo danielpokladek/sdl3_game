@@ -5,12 +5,7 @@
 #include <vector>
 
 #include "components/Component.h"
-
-struct Transform {
-    float x, y;
-    float w, h;
-    float scaleX, scaleY;
-};
+#include "data/Transform.h"
 
 class GameObject {
 private:
@@ -38,7 +33,7 @@ public:
     template<typename T, typename... TArgs>
     T &AddComponent(TArgs &&... args) {
         T *component(new T(std::forward<TArgs>(args)...));
-        component->owner = this;
+        component->SetOwner(this);
 
         std::unique_ptr<Component> uPtr{component};
         mComponents.emplace_back(std::move(uPtr));
