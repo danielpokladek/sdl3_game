@@ -5,7 +5,7 @@
 
 class PlayerControlsComponent : public Component {
 public:
-    PlayerControlsComponent();
+    PlayerControlsComponent(InputHandler *inputHandler);
 
     void Update(float deltaTime) override;
 };

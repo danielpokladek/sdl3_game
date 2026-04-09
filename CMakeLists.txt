@@ -24,6 +24,8 @@ add_executable(sdl_platformer main.cpp
         src/objects/components/player/PlayerControlsComponent.cpp
         src/objects/components/Component.cpp
         src/data/Transform.h
+        src/managers/InputHandler.cpp
+        src/managers/InputHandler.h
 )
 
 # Include SDL3 in the project.

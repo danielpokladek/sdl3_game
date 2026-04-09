@@ -1,6 +1,8 @@
 #include "GameManager.h"
 
 #include <format>
+#include <iostream>
+#include <ostream>
 #include <string>
 #include <SDL3_image/SDL_image.h>
 
@@ -15,6 +17,9 @@ GameManager::GameManager() {
         renderer->Shutdown();
         return;
     }
+
+    auto *inputHandler = new InputHandler();
+    mInputHandler = inputHandler;
 
     mRenderer = renderer;
     mPreviousTicks = SDL_GetTicks();
@@ -43,23 +48,23 @@ void GameManager::StartLoop() {
         tileGO->transform.y = 300;
         container->AddChild(tileGO);
 
-        tileGO->AddComponent<SpriteComponent>(renderer, spritesheet,
+        tileGO->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
                                               static_cast<int>(tile));
     }
 
     auto *player = new GameObject();
     player->transform.x = 60;
     player->transform.y = 250;
-    player->AddComponent<SpriteComponent>(renderer, spritesheet,
+    player->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
                                           static_cast<int>(TileID::PlayerIdle));
-    player->AddComponent<PlayerControlsComponent>();
+    player->AddComponent<PlayerControlsComponent>(mInputHandler);
     container->AddChild(player);
 
     float test = 0.0f;
 
     while (mIsRunning) {
         const uint64_t currentTicks = SDL_GetTicks();
-        const float deltaTime = static_cast<float>(currentTicks - mPreviousTicks) / 1000.0f;
+        const float deltaTime = (currentTicks - mPreviousTicks) / 1000.0f;
 
         test += deltaTime;
         SDL_Event event{0};
@@ -73,6 +78,12 @@ void GameManager::StartLoop() {
 
                 case SDL_EVENT_WINDOW_RESIZED: {
                     mRenderer->SetWindowSize(event.window.data1, event.window.data2);
+                    break;
+                }
+
+                case SDL_EVENT_KEY_DOWN:
+                case SDL_EVENT_KEY_UP: {
+                    mInputHandler->HandleEvent(event);
                     break;
                 }
 

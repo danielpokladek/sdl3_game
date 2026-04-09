@@ -3,7 +3,8 @@
 #include "data/TileData.h"
 #include "objects/GameObject.h"
 
-SpriteComponent::SpriteComponent(SDL_Renderer *renderer, SDL_Texture *texture, int tileIndex) {
+SpriteComponent::SpriteComponent(InputHandler *inputHandler, SDL_Renderer *renderer, SDL_Texture *texture,
+                                 int tileIndex) : Component(inputHandler) {
     mRenderer = renderer;
     mTexture = texture;
     mTileIndex = tileIndex;

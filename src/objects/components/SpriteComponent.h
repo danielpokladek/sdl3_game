@@ -17,7 +17,8 @@ private:
     glm::vec2 *mSpritePosition;
 
 public:
-    SpriteComponent(SDL_Renderer *renderer, SDL_Texture *texture = nullptr, int tileIndex = 0);
+    SpriteComponent(InputHandler *inputHandler, SDL_Renderer *renderer, SDL_Texture *texture = nullptr,
+                    int tileIndex = 0);
 
     ~SpriteComponent();
 
