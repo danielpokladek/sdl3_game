@@ -18,6 +18,10 @@ add_executable(sdl_platformer main.cpp
         src/objects/components/SpriteComponent.h
         src/data/TileData.h
         src/objects/components/Component.h
+        src/objects/components/PlayerControlsComponent.cpp
+        src/objects/components/PlayerControlsComponent.h
+        src/managers/GameManager.cpp
+        src/managers/GameManager.h
 )
 
 # Include SDL3 in the project.
