@@ -1,6 +1,7 @@
 #include "SpriteComponent.h"
 
 #include "data/TileData.h"
+#include "objects/GameObject.h"
 
 SpriteComponent::SpriteComponent(SDL_Renderer *renderer, SDL_Texture *texture, int tileIndex) {
     mRenderer = renderer;
@@ -25,6 +26,8 @@ void SpriteComponent::SetTexture(SDL_Texture *newTexture, const int tileIndex) {
 }
 
 void SpriteComponent::Update(float deltaTime) {
+    const Transform &ownerTransform = owner->transform;
+
     SDL_FRect src{
         .x = mSpritePosition->x,
         .y = mSpritePosition->y,
@@ -33,8 +36,8 @@ void SpriteComponent::Update(float deltaTime) {
     };
 
     SDL_FRect dest{
-        .x = mSpritePosition->x,
-        .y = mSpritePosition->y,
+        .x = ownerTransform.x,
+        .y = ownerTransform.y,
         .w = mSpriteSize->x,
         .h = mSpriteSize->y
     };

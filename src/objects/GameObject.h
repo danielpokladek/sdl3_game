@@ -7,18 +7,25 @@
 
 #include "components/Component.h"
 
+struct Transform {
+    float x, y;
+    float w, h;
+    float scaleX, scaleY;
+};
+
 class GameObject {
 private:
     std::string mName;
 
-    GameObject *mParent;
+    GameObject *mParent = nullptr;
     std::vector<GameObject *> mChildren;
 
     std::vector<std::unique_ptr<Component> > mComponents;
 
 public:
-    glm::vec2 position;
-    glm::vec2 scale;
+    Transform transform = {
+        0, 0, 0, 0, 1, 1
+    };
 
 public:
     GameObject(std::string name = "GameObject");
@@ -37,6 +44,19 @@ public:
         std::unique_ptr<Component> uPtr{component};
         mComponents.emplace_back(std::move(uPtr));
         return *component;
+    }
+
+    template<typename T>
+    T *GetComponent() const {
+        for (auto &component: mComponents) {
+            T *target = dynamic_cast<T *>(component);
+
+            if (target != nullptr) {
+                return target;
+            }
+        }
+
+        return nullptr;
     }
 
     void AddChild(GameObject *child);

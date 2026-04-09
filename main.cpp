@@ -38,7 +38,8 @@ int main() {
         TileID tile = isFirst ? TileID::GroundLeft : isLast ? TileID::GroundRight : TileID::GroundCenter;
 
         auto *tileGO = new GameObject();
-        tileGO->position = glm::vec2(offsetX + i * 16, offsetY);
+        tileGO->transform.x = offsetX + i * 16;
+        tileGO->transform.y = offsetY;
         container->AddChild(tileGO);
 
         tileGO->AddComponent<SpriteComponent>(renderer->State().renderer, spritesheet,
