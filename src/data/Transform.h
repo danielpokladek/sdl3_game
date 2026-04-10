@@ -57,6 +57,14 @@ public:
         mScale.y = scale.y;
     }
 
+    [[nodiscard]] float Rotation() const {
+        return mRotation;
+    }
+
+    void SetRotation(const float rotation) {
+        mRotation = rotation;
+    }
+
     [[nodiscard]] SDL_FRect GetRectangle() const {
         return {mPosition.x, mPosition.y, mSize.x, mSize.y};
     }

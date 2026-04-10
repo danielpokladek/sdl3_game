@@ -28,8 +28,6 @@ public:
 
     [[nodiscard]] std::string Name() const;
 
-    [[nodiscard]] bool IsColliding(const Entity *other) const;
-
     void Update(float deltaTime);
 
     template<typename T, typename... TArgs>

@@ -18,16 +18,10 @@ std::string Entity::Name() const {
     return mName;
 }
 
-bool Entity::IsColliding(const Entity *other) const {
-    SDL_FRect a = transform->GetRectangle();
-    SDL_FRect b = other->transform->GetRectangle();
-
-    return SDL_HasRectIntersectionFloat(&a, &b);
-}
-
 void Entity::Update(float deltaTime) {
     for (auto &component: mComponents) {
         component->Update(deltaTime);
+        component->OnDrawDebug();
     }
 }
 

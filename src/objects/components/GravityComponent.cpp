@@ -1,6 +1,6 @@
 #include "GravityComponent.h"
 
-GravityComponent::GravityComponent(InputHandler *mInputHandler) : Component(mInputHandler) {
+GravityComponent::GravityComponent(InputHandler *inputHandler) : Component(inputHandler) {
     mVelocity = new glm::vec2(0, 0);
 }
 

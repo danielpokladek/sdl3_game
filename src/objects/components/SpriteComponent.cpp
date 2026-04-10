@@ -41,6 +41,6 @@ void SpriteComponent::Update(float deltaTime) {
         .h = mSpriteSize->y
     };
 
-    SDL_RenderTextureRotated(mRenderer, mTexture, &src, &dest, 0, nullptr,
+    SDL_RenderTextureRotated(mRenderer, mTexture, &src, &dest, mTransform->Rotation(), nullptr,
                              SDL_FLIP_NONE);
 }

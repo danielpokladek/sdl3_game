@@ -6,6 +6,7 @@
 
 #include "data/TileData.h"
 #include "objects/Entity.h"
+#include "objects/components/BoxColliderComponent.h"
 #include "objects/components/GravityComponent.h"
 #include "objects/components/player/PlayerControlsComponent.h"
 
@@ -30,11 +31,11 @@ App::App() {
 App::~App() = default;
 
 void App::StartLoop() {
-    SDL_Renderer *renderer = mRenderer->Data().renderer;
+    SDL_Renderer *sdlRenderer = mRenderer->Data().renderer;
 
     std::string spritesheetPath = "assets/sprites/kenney/spritesheet.png";
 
-    SDL_Texture *spritesheet = IMG_LoadTexture(renderer, spritesheetPath.c_str());
+    SDL_Texture *spritesheet = IMG_LoadTexture(sdlRenderer, spritesheetPath.c_str());
     SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
 
     auto *container = new Entity();
@@ -53,15 +54,17 @@ void App::StartLoop() {
         tileGO->transform->Position().y = 300;
         container->AddChild(tileGO);
 
-        tileGO->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
+        tileGO->AddComponent<SpriteComponent>(mInputHandler, sdlRenderer, spritesheet,
                                               static_cast<int>(tile));
     }
 
     auto *player = new Entity();
     player->transform->Position().x = 60;
     player->transform->Position().y = 250;
-    player->AddComponent<GravityComponent>(mInputHandler);
-    player->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
+    auto collider = player->AddComponent<BoxColliderComponent>(mInputHandler, sdlRenderer);
+    collider.SetSize(SPRITESHEET_TILE_SIZE);
+    // player->AddComponent<GravityComponent>(mInputHandler);
+    player->AddComponent<SpriteComponent>(mInputHandler, sdlRenderer, spritesheet,
                                           static_cast<int>(TileID::PlayerIdle));
     player->AddComponent<PlayerControlsComponent>(mInputHandler);
     container->AddChild(player);
@@ -98,8 +101,8 @@ void App::StartLoop() {
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 34, 35, 35, 255);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(sdlRenderer, 34, 35, 35, 255);
+        SDL_RenderClear(sdlRenderer);
 
         // Render stuff here...
         for (auto &child: container->GetChildren()) {
@@ -107,12 +110,12 @@ void App::StartLoop() {
         }
 
         // TODO: For now just showing elapsed time.
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderDebugText(renderer, 5, 5,
+        SDL_SetRenderDrawColor(sdlRenderer, 255, 255, 255, 255);
+        SDL_RenderDebugText(sdlRenderer, 5, 5,
                             std::format("Test Value: {}", test).c_str());
 
         // Swap buffers and show the frame.
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(sdlRenderer);
         mPreviousTicks = currentTicks;
     }
 }

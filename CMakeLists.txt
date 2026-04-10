@@ -28,6 +28,8 @@ add_executable(sdl_platformer main.cpp
         src/managers/InputHandler.h
         src/objects/components/GravityComponent.cpp
         src/objects/components/GravityComponent.h
+        src/objects/components/BoxColliderComponent.cpp
+        src/objects/components/BoxColliderComponent.h
 )
 
 # Include SDL3 in the project.

@@ -9,7 +9,7 @@ private:
     glm::vec2 *mVelocity;
 
 public:
-    GravityComponent(InputHandler *mInputHandler);
+    GravityComponent(InputHandler *inputHandler);
 
     glm::vec2 &GetVelocity() const { return *mVelocity; }
 

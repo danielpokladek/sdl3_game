@@ -20,6 +20,9 @@ public:
     virtual void Update(float deltaTime) {
     }
 
+    virtual void OnDrawDebug() {
+    }
+
     void SetOwner(Entity *owner);
 };
 

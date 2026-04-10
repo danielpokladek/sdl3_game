@@ -20,12 +20,13 @@ public:
     SpriteComponent(InputHandler *inputHandler, SDL_Renderer *renderer, SDL_Texture *texture = nullptr,
                     int tileIndex = 0);
 
-    ~SpriteComponent();
+    ~SpriteComponent() override;
 
-    glm::vec2 *GetSpriteSize() const { return mSpriteSize; }
-    glm::vec2 *GetSpritePosition() const { return mSpritePosition; }
+    [[nodiscard]] glm::vec2 *GetSpriteSize() const { return mSpriteSize; }
 
-    SDL_Texture *GetTexture() const { return mTexture; }
+    [[nodiscard]] glm::vec2 *GetSpritePosition() const { return mSpritePosition; }
+
+    [[nodiscard]] SDL_Texture *GetTexture() const { return mTexture; }
 
     void SetTexture(SDL_Texture *newTexture, int tileIndex = 0);
 
