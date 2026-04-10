@@ -1,6 +1,8 @@
 #include "InputHandler.h"
 
 void InputHandler::HandleEvent(SDL_Event event) {
+    SDL_GetMouseState(&mMouseX, &mMouseY);
+
     SDL_Scancode code = event.key.scancode;
 
     if (code == SDL_SCANCODE_UNKNOWN) return;

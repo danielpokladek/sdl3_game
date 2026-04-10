@@ -11,6 +11,9 @@ private:
     SDL_Scancode mLastKeyDown = SDL_SCANCODE_UNKNOWN;
     SDL_Scancode mLastKeyUp = SDL_SCANCODE_UNKNOWN;
 
+    float mMouseX = 0;
+    float mMouseY = 0;
+
 public:
     void HandleEvent(SDL_Event event);
 

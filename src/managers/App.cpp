@@ -1,8 +1,6 @@
 #include "App.h"
 
 #include <format>
-#include <iostream>
-#include <ostream>
 #include <string>
 #include <SDL3_image/SDL_image.h>
 
@@ -28,6 +26,8 @@ App::App() {
     mIsRunning = true;
     mIsInitialized = true;
 }
+
+App::~App() = default;
 
 void App::StartLoop() {
     SDL_Renderer *renderer = mRenderer->Data().renderer;

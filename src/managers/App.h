@@ -18,11 +18,11 @@ public:
 
     ~App();
 
-    bool HasInitialized() const { return mIsInitialized; }
+    [[nodiscard]] bool HasInitialized() const { return mIsInitialized; }
 
-    Renderer &GetRenderer() const { return *mRenderer; }
+    [[nodiscard]] Renderer &GetRenderer() const { return *mRenderer; }
 
-    InputHandler &GetInputHandler() const { return *mInputHandler; }
+    [[nodiscard]] InputHandler &GetInputHandler() const { return *mInputHandler; }
 
     void StartLoop();
 
