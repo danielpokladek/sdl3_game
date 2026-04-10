@@ -55,6 +55,7 @@ void GameManager::StartLoop() {
     auto *player = new GameObject();
     player->transform.x = 60;
     player->transform.y = 250;
+    player->AddComponent<GravityComponent>(mInputHandler);
     player->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
                                           static_cast<int>(TileID::PlayerIdle));
     player->AddComponent<PlayerControlsComponent>(mInputHandler);

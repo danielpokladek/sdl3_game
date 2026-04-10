@@ -26,6 +26,8 @@ add_executable(sdl_platformer main.cpp
         src/data/Transform.h
         src/managers/InputHandler.cpp
         src/managers/InputHandler.h
+        src/objects/components/GravityComponent.cpp
+        src/objects/components/GravityComponent.h
 )
 
 # Include SDL3 in the project.

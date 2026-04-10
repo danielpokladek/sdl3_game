@@ -41,11 +41,20 @@ public:
     }
 
     template<typename T>
-    T *GetComponent() const {
+    T *GetComponent() {
         for (auto &component: mComponents) {
-            T *target = dynamic_cast<T *>(component);
+            if (T *target = dynamic_cast<T *>(component.get())) {
+                return target;
+            }
+        }
 
-            if (target != nullptr) {
+        return nullptr;
+    }
+
+    template<typename T>
+    const T *GetComponent() const {
+        for (auto &component: mComponents) {
+            if (T *target = dynamic_cast<T *>(component.get())) {
                 return target;
             }
         }
