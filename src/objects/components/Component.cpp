@@ -1,12 +1,12 @@
 #include "Component.h"
 
-#include "objects/GameObject.h"
+#include "objects/Entity.h"
 
 Component::Component(InputHandler *inputHandler) {
     mInputHandler = inputHandler;
 }
 
-void Component::SetOwner(GameObject *owner) {
+void Component::SetOwner(Entity *owner) {
     mOwner = owner;
     mTransform = &owner->transform;
 }

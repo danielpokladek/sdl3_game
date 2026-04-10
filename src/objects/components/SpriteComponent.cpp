@@ -1,7 +1,7 @@
 #include "SpriteComponent.h"
 
 #include "data/TileData.h"
-#include "objects/GameObject.h"
+#include "objects/Entity.h"
 
 SpriteComponent::SpriteComponent(InputHandler *inputHandler, SDL_Renderer *renderer, SDL_Texture *texture,
                                  int tileIndex) : Component(inputHandler) {

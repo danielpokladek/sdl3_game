@@ -3,7 +3,7 @@
 #include "InputHandler.h"
 #include "Renderer.h"
 
-class GameManager {
+class App {
 private:
     bool mIsInitialized = false;
     bool mIsRunning = false;
@@ -14,9 +14,9 @@ private:
     uint64_t mPreviousTicks = 0;
 
 public:
-    GameManager();
+    App();
 
-    ~GameManager();
+    ~App();
 
     bool HasInitialized() const { return mIsInitialized; }
 

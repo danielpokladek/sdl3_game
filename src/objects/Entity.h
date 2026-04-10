@@ -7,12 +7,12 @@
 #include "components/Component.h"
 #include "data/Transform.h"
 
-class GameObject {
+class Entity {
 private:
     std::string mName;
 
-    GameObject *mParent = nullptr;
-    std::vector<GameObject *> mChildren;
+    Entity *mParent = nullptr;
+    std::vector<Entity *> mChildren;
 
     std::vector<std::unique_ptr<Component> > mComponents;
 
@@ -22,11 +22,13 @@ public:
     };
 
 public:
-    GameObject(std::string name = "GameObject");
+    Entity(std::string name = "GameObject");
 
-    virtual ~GameObject() = default;
+    virtual ~Entity() = default;
 
-    const std::vector<GameObject *> &GetChildren() const { return mChildren; }
+    const std::vector<Entity *> &GetChildren() const { return mChildren; }
+
+    bool IsColliding(const Entity *other) const;
 
     void Update(float deltaTime);
 
@@ -62,9 +64,9 @@ public:
         return nullptr;
     }
 
-    void AddChild(GameObject *child);
+    void AddChild(Entity *child);
 
-    void RemoveChild(GameObject *child);
+    void RemoveChild(Entity *child);
 };
 
 #endif //SDL_PLATFORMER_GAMEOBJECT_H

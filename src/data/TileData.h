@@ -4,10 +4,10 @@
 enum class TileID {
     Blank = 0,
     Crate = 9,
-    GroundLeft = 84,
-    GroundCenter = 85,
-    GroundRight = 86,
     PlayerIdle = 240,
+    GroundSecondaryLeft = 270,
+    GroundSecondaryCenter = 271,
+    GroundSecondaryRight = 272,
 };
 
 const int SPRITESHEET_TILE_SIZE = 16;

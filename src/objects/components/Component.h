@@ -3,12 +3,12 @@
 #include "data/Transform.h"
 #include "managers/InputHandler.h"
 
-class GameObject;
+class Entity;
 
 class Component {
 protected:
     Transform *mTransform = nullptr;
-    GameObject *mOwner = nullptr;
+    Entity *mOwner = nullptr;
     InputHandler *mInputHandler = nullptr;
 
 public:
@@ -20,7 +20,7 @@ public:
     virtual void Update(float deltaTime) {
     }
 
-    void SetOwner(GameObject *owner);
+    void SetOwner(Entity *owner);
 };
 
 #endif //SDL_PLATFORMER_COMPONENT_H

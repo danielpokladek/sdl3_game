@@ -12,14 +12,14 @@ find_package(glm REQUIRED)
 add_executable(sdl_platformer main.cpp
         src/Renderer.cpp
         src/Renderer.h
-        src/objects/GameObject.cpp
-        src/objects/GameObject.h
+        src/objects/Entity.cpp
+        src/objects/Entity.h
         src/objects/components/SpriteComponent.cpp
         src/objects/components/SpriteComponent.h
         src/data/TileData.h
         src/objects/components/Component.h
-        src/managers/GameManager.cpp
-        src/managers/GameManager.h
+        src/managers/App.cpp
+        src/managers/App.h
         src/objects/components/player/PlayerControlsComponent.h
         src/objects/components/player/PlayerControlsComponent.cpp
         src/objects/components/Component.cpp

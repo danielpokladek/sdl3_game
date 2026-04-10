@@ -1,17 +1,24 @@
 #include <algorithm>
 
-#include "GameObject.h"
+#include "Entity.h"
 
-GameObject::GameObject(std::string name) : mName(std::move(name)) {
+Entity::Entity(std::string name) : mName(std::move(name)) {
 }
 
-void GameObject::Update(float deltaTime) {
+bool Entity::IsColliding(const Entity *other) const {
+    SDL_FRect a = transform.GetRectangle();
+    SDL_FRect b = other->transform.GetRectangle();
+
+    return SDL_HasRectIntersectionFloat(&a, &b);
+}
+
+void Entity::Update(float deltaTime) {
     for (auto &component: mComponents) {
         component->Update(deltaTime);
     }
 }
 
-void GameObject::AddChild(GameObject *child) {
+void Entity::AddChild(Entity *child) {
     if (child->mParent != nullptr) {
         child->mParent->RemoveChild(child);
     }
@@ -20,7 +27,7 @@ void GameObject::AddChild(GameObject *child) {
     mChildren.push_back(child);
 }
 
-void GameObject::RemoveChild(GameObject *child) {
+void Entity::RemoveChild(Entity *child) {
     auto it = std::remove(mChildren.begin(), mChildren.end(), child);
 
     if (it != mChildren.end()) {

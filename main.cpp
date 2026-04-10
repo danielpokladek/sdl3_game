@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "managers/GameManager.h"
+#include "managers/App.h"
 
 int main() {
-    auto *gameManager = new GameManager();
+    auto *gameManager = new App();
 
     if (!gameManager->HasInitialized()) {
         std::cout << "Failed to initialize game manager!" << std::endl;

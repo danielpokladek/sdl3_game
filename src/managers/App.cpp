@@ -1,4 +1,4 @@
-#include "GameManager.h"
+#include "App.h"
 
 #include <format>
 #include <iostream>
@@ -7,10 +7,11 @@
 #include <SDL3_image/SDL_image.h>
 
 #include "data/TileData.h"
-#include "objects/GameObject.h"
+#include "objects/Entity.h"
+#include "objects/components/GravityComponent.h"
 #include "objects/components/player/PlayerControlsComponent.h"
 
-GameManager::GameManager() {
+App::App() {
     auto *renderer = new Renderer();
 
     if (!renderer->Initialize()) {
@@ -28,7 +29,7 @@ GameManager::GameManager() {
     mIsInitialized = true;
 }
 
-void GameManager::StartLoop() {
+void App::StartLoop() {
     SDL_Renderer *renderer = mRenderer->Data().renderer;
 
     std::string spritesheetPath = "assets/sprites/kenney/spritesheet.png";
@@ -36,14 +37,18 @@ void GameManager::StartLoop() {
     SDL_Texture *spritesheet = IMG_LoadTexture(renderer, spritesheetPath.c_str());
     SDL_SetTextureScaleMode(spritesheet, SDL_SCALEMODE_NEAREST);
 
-    auto *container = new GameObject();
+    auto *container = new Entity();
 
     for (int i = 0; i < 5; i++) {
         const bool isFirst = i == 0;
         const bool isLast = i == 4;
-        const TileID tile = isFirst ? TileID::GroundLeft : isLast ? TileID::GroundRight : TileID::GroundCenter;
+        const TileID tile = isFirst
+                                ? TileID::GroundSecondaryLeft
+                                : isLast
+                                      ? TileID::GroundSecondaryRight
+                                      : TileID::GroundSecondaryCenter;
 
-        auto *tileGO = new GameObject();
+        auto *tileGO = new Entity();
         tileGO->transform.x = 50 + i * 16;
         tileGO->transform.y = 300;
         container->AddChild(tileGO);
@@ -52,7 +57,7 @@ void GameManager::StartLoop() {
                                               static_cast<int>(tile));
     }
 
-    auto *player = new GameObject();
+    auto *player = new Entity();
     player->transform.x = 60;
     player->transform.y = 250;
     player->AddComponent<GravityComponent>(mInputHandler);
@@ -112,6 +117,6 @@ void GameManager::StartLoop() {
     }
 }
 
-void GameManager::Shutdown() {
+void App::Shutdown() {
     mRenderer->Shutdown();
 }
