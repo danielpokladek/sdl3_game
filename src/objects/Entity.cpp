@@ -3,11 +3,24 @@
 #include "Entity.h"
 
 Entity::Entity(std::string name) : mName(std::move(name)) {
+    transform = new Transform();
+}
+
+Entity::~Entity() {
+    transform = nullptr;
+}
+
+const std::vector<Entity *> &Entity::GetChildren() const {
+    return mChildren;
+}
+
+std::string Entity::Name() const {
+    return mName;
 }
 
 bool Entity::IsColliding(const Entity *other) const {
-    SDL_FRect a = transform.GetRectangle();
-    SDL_FRect b = other->transform.GetRectangle();
+    SDL_FRect a = transform->GetRectangle();
+    SDL_FRect b = other->transform->GetRectangle();
 
     return SDL_HasRectIntersectionFloat(&a, &b);
 }

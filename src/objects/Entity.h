@@ -17,18 +17,18 @@ private:
     std::vector<std::unique_ptr<Component> > mComponents;
 
 public:
-    Transform transform = {
-        0, 0, 0, 0, 1, 1
-    };
+    Transform *transform = nullptr;
 
 public:
     Entity(std::string name = "GameObject");
 
-    virtual ~Entity() = default;
+    virtual ~Entity();
 
-    const std::vector<Entity *> &GetChildren() const { return mChildren; }
+    [[nodiscard]] const std::vector<Entity *> &GetChildren() const;
 
-    bool IsColliding(const Entity *other) const;
+    [[nodiscard]] std::string Name() const;
+
+    [[nodiscard]] bool IsColliding(const Entity *other) const;
 
     void Update(float deltaTime);
 

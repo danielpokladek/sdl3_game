@@ -6,8 +6,8 @@ GravityComponent::GravityComponent(InputHandler *mInputHandler) : Component(mInp
 
 void GravityComponent::Update(float deltaTime) {
     mVelocity->y += 50.0f * deltaTime;
-    mTransform->x += mVelocity->x * deltaTime;
-    mTransform->y += mVelocity->y * deltaTime;
+    mTransform->Position().x += mVelocity->x * deltaTime;
+    mTransform->Position().y += mVelocity->y * deltaTime;
 }
 
 void GravityComponent::SetVelocity(float x, float y) {

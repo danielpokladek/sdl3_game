@@ -8,5 +8,5 @@ Component::Component(InputHandler *inputHandler) {
 
 void Component::SetOwner(Entity *owner) {
     mOwner = owner;
-    mTransform = &owner->transform;
+    mTransform = owner->transform;
 }

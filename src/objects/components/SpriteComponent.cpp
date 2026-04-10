@@ -35,8 +35,8 @@ void SpriteComponent::Update(float deltaTime) {
     };
 
     SDL_FRect dest{
-        .x = mTransform->x,
-        .y = mTransform->y,
+        .x = mTransform->Position().x,
+        .y = mTransform->Position().y,
         .w = mSpriteSize->x,
         .h = mSpriteSize->y
     };

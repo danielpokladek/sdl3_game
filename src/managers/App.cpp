@@ -49,8 +49,8 @@ void App::StartLoop() {
                                       : TileID::GroundSecondaryCenter;
 
         auto *tileGO = new Entity();
-        tileGO->transform.x = 50 + i * 16;
-        tileGO->transform.y = 300;
+        tileGO->transform->Position().x = 50 + i * 16;
+        tileGO->transform->Position().y = 300;
         container->AddChild(tileGO);
 
         tileGO->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
@@ -58,8 +58,8 @@ void App::StartLoop() {
     }
 
     auto *player = new Entity();
-    player->transform.x = 60;
-    player->transform.y = 250;
+    player->transform->Position().x = 60;
+    player->transform->Position().y = 250;
     player->AddComponent<GravityComponent>(mInputHandler);
     player->AddComponent<SpriteComponent>(mInputHandler, renderer, spritesheet,
                                           static_cast<int>(TileID::PlayerIdle));
