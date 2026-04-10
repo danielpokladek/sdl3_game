@@ -160,9 +160,11 @@ void App::StartLoop() {
                         if (gravityA) {
                             entity->transform->SetPosition(rectA.x + push, rectA.y);
                             gravityA->GetVelocity().y = 0;
+                            gravityA->SetIsGrounded(true);
                         } else if (gravityB) {
                             entity->transform->SetPosition(rectB.x, rectB.y - push);
                             gravityB->GetVelocity().y = 0;
+                            gravityB->SetIsGrounded(true);
                         }
                     }
 

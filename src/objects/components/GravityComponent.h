@@ -6,6 +6,8 @@
 
 class GravityComponent : public Component {
 private:
+    bool mIsGrounded = false;
+
     glm::vec2 *mVelocity;
 
 public:
@@ -16,6 +18,8 @@ public:
     void Update(float deltaTime) override;
 
     void SetVelocity(float x, float y);
+
+    void SetIsGrounded(bool isGrounded);
 };
 
 #endif //SDL_PLATFORMER_GRAVITYCOMPONENT_H
