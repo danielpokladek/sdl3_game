@@ -23,8 +23,10 @@ SDL_FRect BoxColliderComponent::GetColliderRect() const {
 }
 
 bool BoxColliderComponent::IsColliding(const BoxColliderComponent *other) const {
+    SDL_FRect a = GetColliderRect();
     SDL_FRect b = other->GetColliderRect();
-    return SDL_HasRectIntersectionFloat(mColliderRect, &b);
+
+    return SDL_HasRectIntersectionFloat(&a, &b);
 }
 
 void BoxColliderComponent::OnDrawDebug() {
